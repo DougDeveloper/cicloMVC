@@ -6,6 +6,9 @@ const rotasProduto = require("./rotas/rotasProduto")
 // abaixo a variável utiliza todos os recursos que a biblioteca exxpress pode fornecer
 let app = express()
 
+// criando funcionalidade para arquivos ejs
+app.set("view engine", "ejs")
+
 // abaixo o método .get recebe o primeiro parâmetro, que é o que o usuário vai digitar e após o que será feito.
 // o método res.send retorna o que veremos na página.
 app.get("/", (req, res) => res.send("Esta é a home page."))
@@ -13,6 +16,11 @@ app.get("/", (req, res) => res.send("Esta é a home page."))
 // abaixo é são as mesmas funções, mas para a página de contatos.
 app.get("/contatos", (req, res)=> res.send("Esta é a página de contatos."))
 
+// abaixo estamos atribuindo rotas parametrizadas, ou seja, rotas dinâmicas q podem acessar qualquer produto, neste caso.
+app.get("/produtos/:id", (req, res)=> {
+    let {id} = req.params //desestruturação
+    res.send("Temos um produto com id " + id)
+})
 // a partir desta linha uma rota foi determinada. Com a criação posterior do arquivo de rotas, ela deixa de existir aqui, pois este não é o arquivos de rotas. Ficará comentada para exemplo.
 // abaixo a rota para a página de produtos
 // app.get("/produtos/:id?", (req, res)=>{
